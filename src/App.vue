@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar />
+    <NavBar v-if="$route.meta.title" />
     <keep-alive>
       <router-view></router-view>
     </keep-alive>

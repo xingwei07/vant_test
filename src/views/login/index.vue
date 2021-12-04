@@ -25,7 +25,7 @@
 
 <script>
 import { Form, Field, Button, Toast } from 'vant'
-import { login } from '@/api/user'
+import { login } from '@/modules'
 
 export default {
   name: 'Login',

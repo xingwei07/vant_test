@@ -172,3 +172,51 @@
       setItem(TOKEN_KEY, state.user)
       getItem(TOKEN_KEY)
       ```
+
+## 5. TabBar处理
+
+  1. 新建`layout/index.js`
+      ```html
+      <div>
+        <router-view></router-view>
+        <van-tabbar v-model="active" router>
+          <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
+          <van-tabbar-item icon="search" to="/qa">问答</van-tabbar-item>
+          <van-tabbar-item icon="video-o" to="/video">视频</van-tabbar-item>
+          <van-tabbar-item icon="user-o" to="/me">我的</van-tabbar-item>
+        </van-tabbar>
+      </div>
+      ```
+  2. 新建`home/index.vue、qa/index.vue、video./index.vue、me/index.vue`
+
+  3. `router/index.js`中注册路由
+      ```js
+      {
+        path: '/',
+        name: 'Layout',
+        component: () => import('@/views/layout/index'),
+        children: [
+          {
+            path: '', //默认路由
+            name: 'Home',
+            component: () => import('@/views/home/index')
+          },
+          {
+            path: '/qa',
+            name: 'Qa',
+            component: () => import('@/views/qa/index')
+          },
+          {
+            path: '/video',
+            name: 'Video',
+            component: () => import('@/views/video/index')
+          },
+          {
+            path: '/me',
+            name: 'Me',
+            component: () => import('@/views/me/index')
+          }
+        ]
+      }
+      ``` 
+  

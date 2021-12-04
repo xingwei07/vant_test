@@ -8,6 +8,33 @@ const routes = [
     meta: {
       title: '登录'
     }
+  },
+  {
+    path: '/',
+    name: 'Layout',
+    component: () => import('@/views/layout/index'),
+    children: [
+      {
+        path: '',
+        name: 'Home',
+        component: () => import('@/views/home/index')
+      },
+      {
+        path: '/qa',
+        name: 'Qa',
+        component: () => import('@/views/qa/index')
+      },
+      {
+        path: '/video',
+        name: 'Video',
+        component: () => import('@/views/video/index')
+      },
+      {
+        path: '/me',
+        name: 'Me',
+        component: () => import('@/views/me/index')
+      }
+    ]
   }
 ]
 
