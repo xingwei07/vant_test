@@ -1,14 +1,19 @@
 <template>
-  <van-nav-bar :title="title" class="page-nav-bar" />
+  <van-nav-bar :title="title" class="page-nav-bar">
+    <template #left>
+      <van-icon name="cross" size="18" @click="$router.back()" />
+    </template>
+  </van-nav-bar>
 </template>
 
 <script>
-import { NavBar } from 'vant'
+import { NavBar, Icon } from 'vant'
 
 export default {
   name: 'NavBar',
   components:{
-    [NavBar.name]: NavBar
+    [NavBar.name]: NavBar,
+    [Icon.name]: Icon
   },
   computed: {
     title(){
@@ -25,5 +30,8 @@ export default {
 
   .page-nav-bar .van-nav-bar__title {
     color: white;
+  }
+  .page-nav-bar .van-icon {
+    color: #fff;
   }
 </style>

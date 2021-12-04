@@ -1,5 +1,6 @@
 import { post } from '@/utils/request'
 
-export const login = (data) => {
-  return post('/login', data)
+export async function login(data) {
+  const res = await post('/login', data)
+  return res
 }

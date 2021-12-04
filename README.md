@@ -219,4 +219,14 @@
         ]
       }
       ``` 
-  
+
+## 6. 未登录布局实现
+  1. 添加方法`@click="$router.push('/login')"`跳转登录
+
+  2. `NavBar`使用插槽添加左侧返回图标
+      ```html
+      <template #left>
+        <van-icon name="cross" size="18" @click="$router.back()" />
+      </template>
+      ```
+  3. 添加方法`@click="$router.back()"`退回未登录页面
