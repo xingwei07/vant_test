@@ -148,7 +148,7 @@
         }
         localStorage.setItem(key, value)
       }
-
+      
       //读取数据
       export const getItem = (key) => {
         const data = localStorage.getItem(key)
@@ -158,7 +158,7 @@
           return data
         }
       }
-
+      
       //删除数据
       export const removeItem = (key) => {
         localStorage.removeItem(key)
@@ -168,7 +168,7 @@
   2. 使用
       ```js
       import { setItem, getItem } from '@/utils/storage'
-
+      
       setItem(TOKEN_KEY, state.user)
       getItem(TOKEN_KEY)
       ```
@@ -218,7 +218,7 @@
           }
         ]
       }
-      ``` 
+      ```
 
 ## 6. 未登录布局实现
 
@@ -230,6 +230,9 @@
         <van-icon name="cross" size="18" @click="$router.back()" />
       </template>
       ```
+      `left`：左侧
+      `name`：图标名称
+      `size`：图标大小
   3. 添加方法`@click="$router.back()"`退回未登录页面
 
 ## 7. 已登录布局实现
@@ -243,3 +246,19 @@
         fit="cover"
       ></van-image>
       ```
+      `src`：路径
+      `round`：是否显示为圆形
+      `fit`：图片填充模式
+          `cover`：保持宽高缩放图片，使图片的短边能完全显示出来，裁剪长边
+
+## 8. 宫格导航布局
+
+  1. 宫格组件
+      ```html
+      <van-grid :column-num="2" clickable>
+        <van-grid-item icon="star-o" text="收藏" />
+        <van-grid-item icon="clock-o" text="历史" />
+      </van-grid>
+      ```
+      `column-num`：列数
+      `clickable`：点击反馈

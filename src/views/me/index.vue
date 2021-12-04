@@ -1,11 +1,13 @@
 <template>
   <div class="my-container">
-    <div class="header no-login">
+    <!-- 未登录 -->
+    <div class="header not-login">
       <div class="login-btn" @click="$router.push('/login')">
-        <img class="mobile-img" />
+        <img class="mobile-img" src="../../assets/user.png" />
         <span class="text">注册 / 登录</span>
       </div>
     </div>
+    <!-- 已登录 -->
     <div class="header user-info">
       <div class="base-info">
         <div class="left">
@@ -40,23 +42,30 @@
         </div>
       </div>
     </div>
+    <!-- 导航 -->
+    <van-grid :column-num="2" clickable>
+      <van-grid-item icon="star-o" text="收藏" />
+      <van-grid-item icon="clock-o" text="历史" />
+    </van-grid>
   </div>
 </template>
 
 <script>
-import { Image, Button } from 'vant'
+import { Image, Button, Grid, GridItem } from 'vant'
 export default {
   name: 'NavBar',
   components: {
     [Image.name]: Image,
-    [Button.name]: Button
+    [Button.name]: Button,
+    [Grid.name]: Grid,
+    [GridItem.name]: GridItem
   }
 }
 </script>
 
 <style scoped>
 .my-container .header {
-  height: 361px;
+  height: 261px;
   background: skyblue;
   background-size: cover;
 }
@@ -66,7 +75,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.my-contaainer .not-login .login-btn {
+.my-container .not-login .login-btn {
   display: flex;
   flex-direction: colums;
   justify-content: center;
@@ -98,5 +107,27 @@ export default {
   height: 132px;
   margin-right: 13px;
   border: 1px solid #fff;
+}
+.user-info .left .name {
+  font-size: 16px;
+  color: #fff;
+}
+.user-info .data-stats {
+  display: flex;
+}
+.user-info .data-stats .data-item {
+  height: 130px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.user-info .data-stats .count {
+  font-size: 18px;
+}
+.user-info .data-stats .text {
+  font-size: 18px;
 }
 </style>
