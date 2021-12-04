@@ -47,23 +47,28 @@
       <van-grid-item icon="star-o" text="收藏" />
       <van-grid-item icon="clock-o" text="历史" />
     </van-grid>
+    <!-- 消息通知与退出登录布局 -->
+    <van-cell title="消息通知" is-link />
+    <van-cell title="小智同学" is-link />
+    <van-cell title="退出登录" class="layout-cell" />
   </div>
 </template>
 
 <script>
-import { Image, Button, Grid, GridItem } from 'vant'
+import { Image, Button, Grid, GridItem, Cell } from 'vant'
 export default {
   name: 'NavBar',
   components: {
     [Image.name]: Image,
     [Button.name]: Button,
     [Grid.name]: Grid,
-    [GridItem.name]: GridItem
+    [GridItem.name]: GridItem,
+    [Cell.name]: Cell
   }
 }
 </script>
 
-<style scoped>
+<style>
 .my-container .header {
   height: 261px;
   background: skyblue;
@@ -129,5 +134,14 @@ export default {
 }
 .user-info .data-stats .text {
   font-size: 18px;
+}
+.van-grid-item__icon {
+  color: #eb5253;
+}
+.layout-cell {
+  text-align: center;
+  color: #d86262;
+  height: 120px;
+  margin-top: 9px;
 }
 </style>

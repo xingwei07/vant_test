@@ -262,3 +262,13 @@
       ```
       `column-num`：列数
       `clickable`：点击反馈
+
+## 9. 消息通知与退出登录布局
+
+  1. Cell单元格
+      ```html
+      <van-cell title="消息通知" is-link />
+      <van-cell title="小智同学" is-link />
+      <van-cell title="退出登录" class="layout-cell" />
+      ```
+      `is-link`：右侧箭头图标
