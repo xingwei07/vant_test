@@ -221,6 +221,7 @@
       ``` 
 
 ## 6. 未登录布局实现
+
   1. 添加方法`@click="$router.push('/login')"`跳转登录
 
   2. `NavBar`使用插槽添加左侧返回图标
@@ -230,3 +231,15 @@
       </template>
       ```
   3. 添加方法`@click="$router.back()"`退回未登录页面
+
+## 7. 已登录布局实现
+
+  1. `image`标签
+      ```html
+      <van-image
+        src="http://img.yzcdn.cn/vant/cat.jpeg"
+        class="avatar"
+        round
+        fit="cover"
+      ></van-image>
+      ```
