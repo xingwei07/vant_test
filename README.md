@@ -307,3 +307,24 @@
       `confirm`：选择框
           `then`：确认
           `catch`：取消
+
+## 12. 展示当前用户信息
+
+  1. 封装请求方法
+      ```js
+      export async function getUserInfo(id) {
+        const res = await post('/userInfo', {userId: id, token: store.state.userStore.user.data.token})
+        return res
+      }
+      ```
+  2. 获取用户详细信息
+      ```js
+      async getUserInfo() {
+        if(this.user) {
+          const userId = this.user.data.userId
+          const { data } = await getUserInfo(userId)
+          this.userInfo = data.data[0]
+        }
+      }
+      ```
+

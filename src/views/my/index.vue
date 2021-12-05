@@ -17,7 +17,7 @@
             round
             fit="cover"
           ></van-image>
-          <span class="name">博学谷头条号</span>
+          <span class="name">{{ userInfo.userName }}</span>
         </div>
         <div class="right">
           <van-button size="mini" round>编辑资料</van-button>
@@ -25,20 +25,20 @@
       </div>
       <div class="data-stats">
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.art_count }}</span>
           <span class="text">头条</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
+          <span class="count">{{ userInfo.follow_count }}</span>
           <span class="text">关注</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
-          <span class="text">头条</span>
+          <span class="count">{{ userInfo.fans_count }}</span>
+          <span class="text">粉丝</span>
         </div>
         <div class="data-item">
-          <span class="count">10</span>
-          <span class="text">头条</span>
+          <span class="count">{{ userInfo.like_count }}</span>
+          <span class="text">点赞</span>
         </div>
       </div>
     </div>
@@ -56,6 +56,7 @@
 
 <script>
 import { Image, Button, Grid, GridItem, Cell, Dialog } from 'vant'
+import { getUserInfo } from '@/modules/index'
 export default {
   name: 'My',
   components: {
@@ -65,6 +66,22 @@ export default {
     [GridItem.name]: GridItem,
     [Cell.name]: Cell,
     [Dialog.name]: Dialog
+  },
+  data() {
+    return {
+      userInfo: {
+        userName: "",
+        art_count: 0,
+        follow_count: 0,
+        fans_count: 0,
+        like_count: 0,
+        photo: ''
+      }
+    }
+  },
+  mounted() {
+    //获取用户详细信息
+    this.getUserInfo()
   },
   computed: {
     user() {
@@ -81,6 +98,15 @@ export default {
       }).catch(()=> {
         console.log('取消操作')
       });
+    },
+    //获取用户详细信息
+    async getUserInfo() {
+      if(this.user) {
+        const userId = this.user.data.userId
+        const { data } = await getUserInfo(userId)
+        console.log(data)
+        this.userInfo = data.data[0]
+      }
     }
   }
 }
