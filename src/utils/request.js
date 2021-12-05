@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const service = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: process.env.VUE_APP_URL,
   timeout: 5000
 })
 

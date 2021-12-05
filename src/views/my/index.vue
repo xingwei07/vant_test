@@ -12,7 +12,7 @@
       <div class="base-info">
         <div class="left">
           <van-image
-            src="http://img.yzcdn.cn/vant/cat.jpeg"
+            :src="userInfo.photo"
             class="avatar"
             round
             fit="cover"
@@ -104,7 +104,6 @@ export default {
       if(this.user) {
         const userId = this.user.data.userId
         const { data } = await getUserInfo(userId)
-        console.log(data)
         this.userInfo = data.data[0]
       }
     }
