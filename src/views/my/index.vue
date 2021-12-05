@@ -50,12 +50,12 @@
     <!-- 消息通知与退出登录布局 -->
     <van-cell title="消息通知" is-link />
     <van-cell title="小智同学" is-link />
-    <van-cell v-if="user" title="退出登录" class="layout-cell" />
+    <van-cell v-if="user" @click="onLogout" title="退出登录" class="layout-cell" />
   </div>
 </template>
 
 <script>
-import { Image, Button, Grid, GridItem, Cell } from 'vant'
+import { Image, Button, Grid, GridItem, Cell, Dialog } from 'vant'
 export default {
   name: 'My',
   components: {
@@ -63,11 +63,24 @@ export default {
     [Button.name]: Button,
     [Grid.name]: Grid,
     [GridItem.name]: GridItem,
-    [Cell.name]: Cell
+    [Cell.name]: Cell,
+    [Dialog.name]: Dialog
   },
   computed: {
     user() {
       return this.$store.state.userStore.user
+    }
+  },
+  methods: {
+    //退出登录
+    onLogout() {
+      Dialog.confirm({
+        title: '是否确认退出'
+      }).then(() => {
+        this.$store.commit('userStore/setUser', null)
+      }).catch(()=> {
+        console.log('取消操作')
+      });
     }
   }
 }

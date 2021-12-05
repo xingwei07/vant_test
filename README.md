@@ -288,3 +288,22 @@
       ```js
       this.$router.push('/my')
       ```
+
+## 11. 退出登录
+
+  1. 清空用户信息
+      `this.$store.commit('userStore/setUser', null)`
+
+  2. `Dialog`组件
+      ```js
+      Dialog.confirm({
+        title: '是否确认退出'
+      }).then(() => {
+        this.$store.commit('userStore/setUser', null)
+      }).catch(()=> {
+        console.log('取消操作')
+      });
+      ```
+      `confirm`：选择框
+          `then`：确认
+          `catch`：取消
