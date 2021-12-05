@@ -58,6 +58,7 @@ export default {
       if(data.code === 0) {
         Toast.success("用户登录成功");
         this.$store.commit('userStore/setUser', data)
+        this.$router.push('/my')
       } else {
         Toast.fail(data.data.msg);
       }

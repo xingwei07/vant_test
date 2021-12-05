@@ -1,14 +1,14 @@
 <template>
   <div class="my-container">
     <!-- 未登录 -->
-    <div class="header not-login">
+    <div v-if="!user" class="header not-login">
       <div class="login-btn" @click="$router.push('/login')">
         <img class="mobile-img" src="../../assets/user.png" />
         <span class="text">注册 / 登录</span>
       </div>
     </div>
     <!-- 已登录 -->
-    <div class="header user-info">
+    <div v-else class="header user-info">
       <div class="base-info">
         <div class="left">
           <van-image
@@ -50,20 +50,25 @@
     <!-- 消息通知与退出登录布局 -->
     <van-cell title="消息通知" is-link />
     <van-cell title="小智同学" is-link />
-    <van-cell title="退出登录" class="layout-cell" />
+    <van-cell v-if="user" title="退出登录" class="layout-cell" />
   </div>
 </template>
 
 <script>
 import { Image, Button, Grid, GridItem, Cell } from 'vant'
 export default {
-  name: 'NavBar',
+  name: 'My',
   components: {
     [Image.name]: Image,
     [Button.name]: Button,
     [Grid.name]: Grid,
     [GridItem.name]: GridItem,
     [Cell.name]: Cell
+  },
+  computed: {
+    user() {
+      return this.$store.state.userStore.user
+    }
   }
 }
 </script>
@@ -82,7 +87,7 @@ export default {
 }
 .my-container .not-login .login-btn {
   display: flex;
-  flex-direction: colums;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

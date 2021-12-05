@@ -272,3 +272,19 @@
       <van-cell title="退出登录" class="layout-cell" />
       ```
       `is-link`：右侧箭头图标
+
+## 10. 处理页面显示状态
+
+  1. 获取vuex中的用户信息
+      ```js
+      computed: {
+        user() {
+          return this.$store.state.userStore.user
+        }
+      }
+      ```
+
+  2. 登录成功跳转
+      ```js
+      this.$router.push('/my')
+      ```

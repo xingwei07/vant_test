@@ -15,9 +15,6 @@ export default {
   name: 'App',
   components: {
     NavBar
-  },
-  mounted(){
-    console.log(this.$store.state.userStore.user)
   }
 }
 </script>

@@ -11,7 +11,6 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Layout',
     component: () => import('@/views/layout/index'),
     children: [
       {
@@ -30,9 +29,9 @@ const routes = [
         component: () => import('@/views/video/index')
       },
       {
-        path: '/me',
-        name: 'Me',
-        component: () => import('@/views/me/index')
+        path: '/my',
+        name: 'My',
+        component: () => import('@/views/my/index')
       }
     ]
   }
