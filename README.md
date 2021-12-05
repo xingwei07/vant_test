@@ -327,4 +327,35 @@
         }
       }
       ```
+## 13. 用户头像处理
 
+  1. `:src="userInfo.photo"`
+  2. 配置环境变量
+      1. 新建文件`.env.development`
+      2. ```
+          NODE_DEV=development
+          VUE_APP_URL='http://localhost:5000'
+          ```
+          `development`：开发环境
+          `production`：生产环境
+          必须以`VUE_APP_`开头
+      3. 使用方式：`process.env.VUE_APP_URL`
+
+## 14. 优化设置Token
+
+  1. 设置请求拦截器
+      ```js
+      //请求拦截器
+      service.interceptors.request.use(
+        function(config) {
+          const user = store.state.userStore.user
+          if(user && user.data) {
+            config.headers.accessToken = user.data.token
+          }
+          return config
+        },
+        function(err) {
+          return Promise.reject(err)
+        }
+      )
+      ```
