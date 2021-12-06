@@ -8,12 +8,11 @@
       line-width="20px"
       line-height="6px"
     >
-      <van-tab title="标签 1">内容 1</van-tab>
-      <van-tab title="标签 2">内容 2</van-tab>
-      <van-tab title="标签 3">内容 3</van-tab>
-      <van-tab title="标签 4">内容 4</van-tab>
-      <van-tab title="标签 5">内容 5</van-tab>
-      <van-tab title="标签 6">内容 6</van-tab>
+      <van-tab 
+        v-for="channel in channels"
+        :key="channel.id"
+        :title="channel.name"
+      >{{ channel.name }}的内容</van-tab>
       <template #nav-right>
         <i class="placeholder"></i>
         <van-icon name="wap-nav" class="hamburger-btn"></van-icon>
@@ -25,6 +24,7 @@
 <script>
 import { Tabs, Tab, Icon } from 'vant'
 import Search from '@/components/NavBar/Search'
+import { getUserChannels } from '@/modules/index'
 
 export default {
   name: 'Home',
@@ -37,7 +37,17 @@ export default {
   data() {
     return {
       active: 0,
-    };
+      channels: []
+    }
+  },
+  mounted() {
+    this.getUserChannels()
+  },
+  methods: {
+    async getUserChannels() {
+      const { data } = await getUserChannels()
+      this.channels = data.data
+    }
   }
 }
 </script>

@@ -452,3 +452,22 @@
         height: 32px;
       }
       ```
+
+## 19. 获取频道列表数据
+
+  1. 封装请求方法
+      ```js
+      // 获取用户频道列表数据
+      export async function getUserChannels() {
+        const res = await post('/channels', {})
+        return res
+      }
+      ```
+
+  2. 获取用户频道列表信息
+      ```js
+      async getUserChannels() {
+        const { data } = await getUserChannels()
+        this.channels = data.data
+      }
+      ```
