@@ -86,4 +86,7 @@ export default {
   width: 66px;
   height: 32px;
 }
+.home-container {
+  padding-bottom:50px;
+}
 </style>
