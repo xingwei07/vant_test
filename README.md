@@ -418,3 +418,37 @@
       `title-active-color`：标题选中态颜色 
       `line-width`：底部条宽度 
       `line-height`：底部条高度 
+
+## 18. 频道列表按钮处理
+
+  1. `Tabs`使用插槽实现
+      ```html
+      <template #nav-right>
+        <i class="placeholder"></i> <!-- 占位符 -->
+        <van-icon name="wap-nav" class="hamburger-btn"></van-icon>
+      </template>
+      ```
+  
+  2. 样式
+      ```css
+      .channels-tabs .hamburger-btn {
+        /* 固定定位 */
+        position: fixed;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 66px;
+        height: 32px;
+        background-color: #fff;
+        /* 设置透明度 */
+        opacity: 0.902;
+        /* 设置图标大小 */
+        font-size: 23px;
+      }
+      .channels-tabs .placeholder { <!-- 加入占位符，防止最后一个标签被遮盖 -->
+        flex-shrink: 0; <!-- 占位符不参与flex布局计算 -->
+        width: 66px;
+        height: 32px;
+      }
+      ```
