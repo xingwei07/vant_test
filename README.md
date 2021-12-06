@@ -2,8 +2,8 @@
 
 ## 1. 封装请求模块
 
-   1. ```npm install axios```
-   2. 新建```utils/request.js```
+   1. `npm install axios`
+   2. 新建`utils/request.js`
       1. ```js
           //导入axios 
           import axios from 'axios'
@@ -30,8 +30,8 @@
           ```
 ## 2. 创建登录路由
 
-   1. ```npm install vue-router```
-   2. 新建```router/index.js```
+   1. `npm install vue-router`
+   2. 新建`router/index.js`
       1. ```js
           //创建路由集合
           const routes = [
@@ -52,14 +52,15 @@
           //暴露路由器
           export default router
           ```
-  3. ```main.js```中引入
+  3. `main.js`中引入
+     
      1. ```js
           import VueRouter from 'vue-router'
           import router from './router/index'
         ```
-
+     
      2. ```Vue.use(VueRouter)```
-
+     
      3. ```js
         new Vue({
           render: h => h(App),
@@ -381,3 +382,16 @@
       `size`：尺寸，可选值为 large small mini 
       `round`：是否为圆形按钮 
       `icon`：左侧图标名称或图片链接 
+
+## 16. 文章频道列表构建
+
+  1. `van-tabs`组件
+      ```html
+      <van-tabs v-model="active">
+        <van-tab title="标签 1">内容 1</van-tab>
+        <van-tab title="标签 2">内容 2</van-tab>
+        <van-tab title="标签 3">内容 3</van-tab>
+        <van-tab title="标签 4">内容 4</van-tab>
+      </van-tabs>
+      ```
+      `active`：默认标签
