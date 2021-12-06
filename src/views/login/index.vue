@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NavBar v-if="$route.meta.title" />
     <van-form @submit="onSubmit">
       <van-field
         name="userName"
@@ -26,10 +27,12 @@
 <script>
 import { Form, Field, Button, Toast } from 'vant'
 import { login } from '@/modules'
+import NavBar from '@/components/NavBar/index'
 
 export default {
   name: 'Login',
   components:{
+    NavBar,
     [Form.name]: Form,
     [Field.name]: Field,
     [Button.name]: Button,
@@ -68,7 +71,7 @@ export default {
 </script>
 
 <style scoped>
-  /* .page-nav-bar {
-    background-color: #3296fa;
-  } */
+.page-nav-bar {
+  background-color: #3296fa;
+}
 </style>

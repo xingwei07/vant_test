@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavBar v-if="$route.meta.title" />
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -9,12 +8,12 @@
 </template>
 
 <script>
-import NavBar from '@/components/NavBar/index'
+// import NavBar from '@/components/NavBar/index'
 
 export default {
   name: 'App',
   components: {
-    NavBar
+    // NavBar
   }
 }
 </script>

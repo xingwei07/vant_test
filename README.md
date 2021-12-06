@@ -5,8 +5,8 @@
    1. ```npm install axios```
    2. 新建```utils/request.js```
       1. ```js
-            //导入axios 
-            import axios from 'axios'
+          //导入axios 
+          import axios from 'axios'
           ```
       2. ```js
           //创建axios实例对象
@@ -28,7 +28,7 @@
       4. ```js
           export default service
           ```
-## 2. 创建登陆路由
+## 2. 创建登录路由
 
    1. ```npm install vue-router```
    2. 新建```router/index.js```
@@ -43,10 +43,10 @@
           ]
           ```
       2. ```js
-            //创建路由器
-            const router = new VueRouter({
-              routes
-            })
+          //创建路由器
+          const router = new VueRouter({
+            routes
+          })
           ```
       3. ```js
           //暴露路由器
@@ -61,10 +61,10 @@
      2. ```Vue.use(VueRouter)```
 
      3. ```js
-         new Vue({
-           render: h => h(App),
-           router
-         }).$mount('#app')
+        new Vue({
+          render: h => h(App),
+          router
+        }).$mount('#app')
         ```
 
 ## 3. 处理用户Token
@@ -179,7 +179,7 @@
       ```html
       <div>
         <router-view></router-view>
-        <van-tabbar v-model="active" router>
+        <van-tabbar v-model="active" route>
           <van-tabbar-item icon="home-o" to="/">首页</van-tabbar-item>
           <van-tabbar-item icon="search" to="/qa">问答</van-tabbar-item>
           <van-tabbar-item icon="video-o" to="/video">视频</van-tabbar-item>
@@ -230,9 +230,9 @@
         <van-icon name="cross" size="18" @click="$router.back()" />
       </template>
       ```
-      `left`：左侧
-      `name`：图标名称
-      `size`：图标大小
+      `left`：左侧 
+      `name`：图标名称 
+      `size`：图标大小 
   3. 添加方法`@click="$router.back()"`退回未登录页面
 
 ## 7. 已登录布局实现
@@ -246,9 +246,9 @@
         fit="cover"
       ></van-image>
       ```
-      `src`：路径
-      `round`：是否显示为圆形
-      `fit`：图片填充模式
+      `src`：路径 
+      `round`：是否显示为圆形 
+      `fit`：图片填充模式 
           `cover`：保持宽高缩放图片，使图片的短边能完全显示出来，裁剪长边
 
 ## 8. 宫格导航布局
@@ -260,8 +260,8 @@
         <van-grid-item icon="clock-o" text="历史" />
       </van-grid>
       ```
-      `column-num`：列数
-      `clickable`：点击反馈
+      `column-num`：列数 
+      `clickable`：点击反馈 
 
 ## 9. 消息通知与退出登录布局
 
@@ -304,9 +304,9 @@
         console.log('取消操作')
       });
       ```
-      `confirm`：选择框
-          `then`：确认
-          `catch`：取消
+      `confirm`：选择框 
+          `then`：确认 
+          `catch`：取消 
 
 ## 12. 展示当前用户信息
 
@@ -336,9 +336,9 @@
           NODE_DEV=development
           VUE_APP_URL='http://localhost:5000'
           ```
-          `development`：开发环境
-          `production`：生产环境
-          必须以`VUE_APP_`开头
+          `development`：开发环境 
+          `production`：生产环境 
+          必须以`VUE_APP_`开头 
       3. 使用方式：`process.env.VUE_APP_URL`
 
 ## 14. 优化设置Token
@@ -359,3 +359,25 @@
         }
       )
       ```
+
+## 15. 头部布局实现
+
+  1. `NavBar`使用插槽实现
+
+      ```html
+      <van-nav-bar class="page-nav-bar">
+        <template #right>
+          <van-button 
+            type="info"
+            size="small"
+            round
+            icon="search"
+            class="search-button"
+          >搜索</van-button>
+        </template>
+      </van-nav-bar>
+      ```
+      `type`；类型，可选值为 primary info warning danger 
+      `size`：尺寸，可选值为 large small mini 
+      `round`：是否为圆形按钮 
+      `icon`：左侧图标名称或图片链接 
