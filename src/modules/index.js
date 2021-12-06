@@ -18,3 +18,9 @@ export async function getUserChannels() {
   const res = await post('/channels', {})
   return res
 }
+
+// 获取文章列表
+export async function getArticles(data) {
+  const res = await post('/articles', data)
+  return res
+}

@@ -50,7 +50,7 @@ export default {
   methods: {
     async getUserChannels() {
       const { data } = await getUserChannels()
-      this.channels = data.data
+      this.channels.push(...data.data)
     }
   }
 }

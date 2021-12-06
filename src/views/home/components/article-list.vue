@@ -4,15 +4,16 @@
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
-      @load="onLoad"
+      @load="onLoad(channel.id)"
     >
-      <van-cell v-for="item in list" :key="item" :title="item" />
+      <van-cell v-for="channel in channels" :key="channel.id" :title="channel.title" />
     </van-list>
   </div>
 </template>
 
 <script>
 import { List, Cell } from 'vant'
+import { getArticles } from '@/modules/index'
 
 export default {
   name: 'ArticleList',
@@ -28,32 +29,36 @@ export default {
   },
   data() {
     return {
-      list: [],
+      channels: [],
       loading: false,
-      finished: false
+      finished: false,
+      pageSize: 10,
+      pageNum: 1
     }
   },
   methods: {
-    onLoad() {
-      // 异步更新数据
-      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+    onLoad(id) {
+      this.getListAll(id)
+    },
+    async getListAll(id){
+      //请求参数
+      const params = {
+        channel_id: id,
+        pageSize: this.pageSize,
+        pageNum: this.pageNum
+      }
       // 1. 发送异步请求获取数据
-      setTimeout(() => {
-        // 2. 获取到服务端返回的数据，将其填充到list数据
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1);
-        }
-
+      const { data } = await getArticles(params)
+      if(data.status) {
+        // 2. 获取到服务端返回的数据，将其填充到channels
+        this.channels.push(...data.data)
         // 3. 本次数据加载完成后，要把加载状态设置为结束，loading设置为false以后，才能够触发下一次的加载更多的操作
-        // 加载状态结束
-        this.loading = false;
-
-        // 数据全部加载完成
+        this.loading = false
+        this.pageNum++
+      } else {
         // 4. 当数据全部加载完成后，把finished设置为true
-        if (this.list.length >= 40) {
-          this.finished = true;
-        }
-      }, 1000);
+        this.finished = true
+      }
     }
   }
 }
