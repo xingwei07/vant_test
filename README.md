@@ -395,3 +395,26 @@
       </van-tabs>
       ```
       `active`：默认标签
+
+## 17. 样式调整
+  1. 调整`Tabs`样式
+      ```html
+      <van-tabs 
+        class="channels-tabs"
+        v-model="active"
+        title-active-color="red"
+        line-width="20px"
+        line-height="6px"
+      >
+        <van-tab title="标签 1">内容 1</van-tab>
+        <van-tab title="标签 2">内容 2</van-tab>
+        <van-tab title="标签 3">内容 3</van-tab>
+        <van-tab title="标签 4">内容 4</van-tab>
+        <van-tab title="标签 5">内容 5</van-tab>
+        <van-tab title="标签 6">内容 6</van-tab>
+      </van-tabs>
+      ```
+      `v-model`：默认标签 
+      `title-active-color`：标题选中态颜色 
+      `line-width`：底部条宽度 
+      `line-height`：底部条高度 
