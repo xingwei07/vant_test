@@ -471,3 +471,20 @@
         this.channels = data.data
       }
       ```
+
+## 20. 创建文章列表组件
+
+  1. 创建`components/article-list.vue`
+
+  2. 传递参数
+      `<ArticleList :channel="channel" />`
+
+  3. 接收参数
+      ```
+      props: {
+        channel: {
+          type: Object,
+          required: true
+        }
+      }
+      ```

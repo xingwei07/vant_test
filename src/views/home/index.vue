@@ -12,7 +12,9 @@
         v-for="channel in channels"
         :key="channel.id"
         :title="channel.name"
-      >{{ channel.name }}的内容</van-tab>
+      >
+        <ArticleList :channel="channel" />
+      </van-tab>
       <template #nav-right>
         <i class="placeholder"></i>
         <van-icon name="wap-nav" class="hamburger-btn"></van-icon>
@@ -25,6 +27,7 @@
 import { Tabs, Tab, Icon } from 'vant'
 import Search from '@/components/NavBar/Search'
 import { getUserChannels } from '@/modules/index'
+import ArticleList from './components/article-list'
 
 export default {
   name: 'Home',
@@ -32,7 +35,8 @@ export default {
     [Tabs.name]: Tabs,
     [Tab.name]: Tab,
     [Icon.name]: Icon,
-    Search
+    Search,
+    ArticleList
   },
   data() {
     return {
