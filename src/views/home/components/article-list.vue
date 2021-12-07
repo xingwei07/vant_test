@@ -105,5 +105,7 @@ export default {
 }
 .article-list {
   margin-top: 80px;
+  height: 530px;
+  overflow-y: auto;
 }
 </style>

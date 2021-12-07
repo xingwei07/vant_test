@@ -647,3 +647,16 @@
         margin-top: 80px;
       }
       ```
+
+## 26. 记住列表滚动位置
+
+  1. 添加样式
+      ```css
+      .article-list {
+        height: 530px;
+        overflow-y: auto;
+      }
+      ```
+      `height`：设置页面高度值  
+      `overflow-y`：设置溢出滚动  
+
