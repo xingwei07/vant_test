@@ -652,7 +652,7 @@
 
   1. 添加样式
       ```css
-      .article-list {
+      .article-list { //最外层div样式
         height: 530px;
         overflow-y: auto;
       }
@@ -660,3 +660,17 @@
       `height`：设置页面高度值  
       `overflow-y`：设置溢出滚动  
 
+## 27. 文章列表组件创建
+
+  1. 创建文件`src/components/article-item/index.vue`
+
+  2. 使用`Cell`组件
+      ```html
+      <van-cell 
+        :key="article.id"
+        :title="article.title"
+        class="cell-list"
+      />
+      ```
+
+  

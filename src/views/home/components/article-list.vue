@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="article-list">
     <van-pull-refresh
       v-model="isLoading"
       @refresh="onRefresh"
@@ -13,13 +13,18 @@
         @load="onLoad(channel.id)"
         :error.sync="error"
         error-text="请求失败，点击重新加载"
-        class="article-list"
       >
-        <van-cell 
-          v-for="channel in channels"
-          :key="channel.id"
-          :title="channel.title"
+        <!-- <van-cell 
+          v-for="article in channels"
+          :key="article.id"
+          :title="article.title"
           class="cell-list"
+        /> -->
+        <ArticleItem 
+          v-for="article in channels"
+          :key="article.id"
+          class="cell-list"
+          :article="article"
         />
       </van-list>
     </van-pull-refresh>
@@ -29,6 +34,7 @@
 <script>
 import { List, Cell, PullRefresh } from 'vant'
 import { getArticles } from '@/modules/index'
+import ArticleItem from '@/components/article-item'
 
 export default {
   name: 'ArticleList',
@@ -42,7 +48,8 @@ export default {
   components: {
     [List.name]: List,
     [Cell.name]: Cell,
-    [PullRefresh.name]: PullRefresh
+    [PullRefresh.name]: PullRefresh,
+    ArticleItem
   },
   data() {
     return {
@@ -99,10 +106,10 @@ export default {
 }
 </script>
 
-<style>
-.cell-list {
+<style scoped>
+/* .cell-list {
   min-height: 100px;
-}
+} */
 .article-list {
   margin-top: 80px;
   height: 530px;
