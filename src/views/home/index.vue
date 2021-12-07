@@ -25,7 +25,7 @@
 
 <script>
 import { Tabs, Tab, Icon } from 'vant'
-import Search from '@/components/NavBar/Search'
+import Search from '@/components/nav-bar/Search'
 import { getUserChannels } from '@/modules/index'
 import ArticleList from './components/article-list'
 

@@ -27,7 +27,7 @@
 <script>
 import { Form, Field, Button, Toast } from 'vant'
 import { login } from '@/modules'
-import NavBar from '@/components/NavBar/index'
+import NavBar from '@/components/nav-bar/index'
 
 export default {
   name: 'Login',
