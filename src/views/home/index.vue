@@ -86,6 +86,13 @@ export default {
   width: 66px;
   height: 32px;
 }
+.channels-tabs .van-tabs__wrap {
+  position: fixed;
+  top: 46px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
 .home-container {
   padding-bottom:50px;
 }

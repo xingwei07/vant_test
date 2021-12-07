@@ -13,6 +13,7 @@
         @load="onLoad(channel.id)"
         :error.sync="error"
         error-text="请求失败，点击重新加载"
+        class="article-list"
       >
         <van-cell 
           v-for="channel in channels"
@@ -101,5 +102,8 @@ export default {
 <style>
 .cell-list {
   min-height: 100px;
+}
+.article-list {
+  margin-top: 80px;
 }
 </style>

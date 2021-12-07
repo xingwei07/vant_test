@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar class="page-nav-bar">
+  <van-nav-bar class="page-nav-bar" fixed>
     <template #right>
       <van-button 
         type="info"

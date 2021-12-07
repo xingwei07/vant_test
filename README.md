@@ -617,3 +617,33 @@
       `success-text`：刷新成功提示文案  
       `success-duration`：刷新成功提示展示时长(ms)  
       数据加载完成或失败将`isLoading`设置为`false`结束下拉状态
+
+## 25. 固定头部区域
+
+  1. 固定`NavBar`组件
+      ```html
+      <van-nav-bar class="page-nav-bar" fixed></van-nav-bar>
+      ```
+      `fixed`：是否固定在顶部
+  
+  2. 固定`Tabs`组件
+      ```css
+      .channels-tabs .van-tabs__wrap {
+        position: fixed; 
+        top: 46px;
+        left: 0;
+        right: 0;
+        z-index: 1;
+      }
+      ```
+      `position`：固定定位
+      `top`：距顶部距离
+      `left、right`：不设置无法左右滑动
+      `z-index`：设置层级，不设置会盖在list下面
+
+  3. 修改`List`组件样式
+      ```css
+      .article-list {
+        margin-top: 80px;
+      }
+      ```
