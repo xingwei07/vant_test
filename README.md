@@ -231,9 +231,9 @@
         <van-icon name="cross" size="18" @click="$router.back()" />
       </template>
       ```
-      `left`：左侧 
-      `name`：图标名称 
-      `size`：图标大小 
+      `left`：左侧  
+      `name`：图标名称  
+      `size`：图标大小  
   3. 添加方法`@click="$router.back()"`退回未登录页面
 
 ## 7. 已登录布局实现
@@ -247,10 +247,10 @@
         fit="cover"
       ></van-image>
       ```
-      `src`：路径 
-      `round`：是否显示为圆形 
-      `fit`：图片填充模式 
-          `cover`：保持宽高缩放图片，使图片的短边能完全显示出来，裁剪长边
+      `src`：路径  
+      `round`：是否显示为圆形  
+      `fit`：图片填充模式  
+      	`cover`：保持宽高缩放图片，使图片的短边能完全显示出来，裁剪长边
 
 ## 8. 宫格导航布局
 
@@ -261,8 +261,8 @@
         <van-grid-item icon="clock-o" text="历史" />
       </van-grid>
       ```
-      `column-num`：列数 
-      `clickable`：点击反馈 
+      `column-num`：列数  
+      `clickable`：点击反馈  
 
 ## 9. 消息通知与退出登录布局
 
@@ -305,9 +305,9 @@
         console.log('取消操作')
       });
       ```
-      `confirm`：选择框 
-          `then`：确认 
-          `catch`：取消 
+      `confirm`：选择框  
+        	`then`：确认  
+        	`catch`：取消  
 
 ## 12. 展示当前用户信息
 
@@ -337,8 +337,8 @@
           NODE_DEV=development
           VUE_APP_URL='http://localhost:5000'
           ```
-          `development`：开发环境 
-          `production`：生产环境 
+          `development`：开发环境  
+          `production`：生产环境  
           必须以`VUE_APP_`开头 
       3. 使用方式：`process.env.VUE_APP_URL`
 
@@ -378,10 +378,10 @@
         </template>
       </van-nav-bar>
       ```
-      `type`；类型，可选值为 primary info warning danger 
-      `size`：尺寸，可选值为 large small mini 
-      `round`：是否为圆形按钮 
-      `icon`：左侧图标名称或图片链接 
+      `type`；类型，可选值为 primary info warning danger  
+      `size`：尺寸，可选值为 large small mini  
+      `round`：是否为圆形按钮  
+      `icon`：左侧图标名称或图片链接  
 
 ## 16. 文章频道列表构建
 
@@ -394,7 +394,7 @@
         <van-tab title="标签 4">内容 4</van-tab>
       </van-tabs>
       ```
-      `active`：默认标签
+      `active`：默认标签 
 
 ## 17. 样式调整
   1. 调整`Tabs`样式
@@ -414,10 +414,10 @@
         <van-tab title="标签 6">内容 6</van-tab>
       </van-tabs>
       ```
-      `v-model`：默认标签 
-      `title-active-color`：标题选中态颜色 
-      `line-width`：底部条宽度 
-      `line-height`：底部条高度 
+      `v-model`：默认标签  
+      `title-active-color`：标题选中态颜色  
+      `line-width`：底部条宽度  
+      `line-height`：底部条高度  
 
 ## 18. 频道列表按钮处理
 
@@ -502,10 +502,10 @@
         <van-cell v-for="item in list" :key="item" :title="item" />
       </van-list>
       ```
-      `v-model`：是否处于加载状态 
-      `finished`：是否已加载完成 
-      `finished-text`：加载完成后的提示文案 
-      `load`：滚动条与底部距离小于 offset 时触发 
+      `v-model`：是否处于加载状态  
+      `finished`：是否已加载完成  
+      `finished-text`：加载完成后的提示文案  
+      `load`：滚动条与底部距离小于 offset 时触发  
 
   2. `data`默认数据
       ```js
@@ -517,8 +517,8 @@
         }
       }
       ```
-      `loading`：是否处于加载状态 
-      `finished`：是否已加载完成 
+      `loading`：是否处于加载状态  
+      `finished`：是否已加载完成  
   
   3. `methods`示例
       ```js
@@ -544,9 +544,9 @@
         }, 1000);
       }
       ```
-      `onLoad`：滚动条与底部距离小于 offset 时触发
-      `loading`：是否处于加载状态 
-      `finished`：是否已加载完成 
+      `onLoad`：滚动条与底部距离小于 offset 时触发 
+      `loading`：是否处于加载状态  
+      `finished`：是否已加载完成  
 
 ## 22. 获取频道列表数据
 
@@ -597,3 +597,23 @@
           this.loading = false // 结束本次加载
         }
       ```
+      `error`：是否加载失败，加载失败后点击错误提示可以重新触发load事件，必须使用sync修饰符  
+      `error-text`：加载失败后的提示文案
+
+## 24. 下拉刷新效果
+
+  1. `PullRefresh`组件
+      ```html
+      <van-pull-refresh
+        v-model="isLoading"
+        @refresh="onRefresh"
+        :success-text="refreshText"
+        success-duration="1000"
+      >
+      </van-pull-refresh>
+      ```
+      `v-model`：是否处于加载中状态  
+      `refresh`：下拉刷新时触发  
+      `success-text`：刷新成功提示文案  
+      `success-duration`：刷新成功提示展示时长(ms)  
+      数据加载完成或失败将`isLoading`设置为`false`结束下拉状态
