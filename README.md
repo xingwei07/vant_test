@@ -531,11 +531,11 @@
           for (let i = 0; i < 10; i++) {
             this.list.push(this.list.length + 1);
           }
-
+      
           // 3. 本次数据加载完成后，要把加载状态设置为结束，loading设置为false以后，才能够触发下一次的加载更多的操作
           // 加载状态结束
           this.loading = false;
-
+      
           // 数据全部加载完成
           // 4. 当数据全部加载完成后，把finished设置为true
           if (this.list.length >= 40) {
@@ -579,4 +579,21 @@
         // 4. 当数据全部加载完成后，把finished设置为true
         this.finished = true
       }
+      ```
+
+## 23. 请求失败的处理
+
+  1. `List`组件
+      ```js
+      :error.sync="error"
+      error-text="请求失败，点击重新加载"
+      
+      data：
+        error: false
+      
+      methods:
+        } catch (error) {
+          this.error = true // 展示错误信息
+          this.loading = false // 结束本次加载
+        }
       ```
