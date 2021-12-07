@@ -673,4 +673,36 @@
       />
       ```
 
-  
+## 28. 展示列表项内容
+
+  1. 使用`Cell`组件
+      ```html
+      <van-cell class="article-item">
+        <template #title>
+          <span class="title van-multi-ellipsis--l2">
+            {{ article.title }}
+          </span>
+        </template>
+        <template #label>
+          <div v-if="article.type === 3" class="cover-wrap">
+            <div v-for="(image, index) in article.images" :key="index">
+              <van-image width="100" height="100" :src="image"></van-image>
+            </div>
+          </div>
+          <span>{{ article.aut_name }}</span>
+          <span>{{ article.comm_count }}</span>
+          <span>{{ article.pubdate }}</span>
+        </template>
+        <template #right-icon v-if="article.type === 1">
+          <van-image
+            width="100"
+            height="100"
+            :src="article.images[0]"
+          ></van-image>
+        </template>
+      </van-cell>
+      ```
+      `title`：自定义左侧 title 的内容  
+          `van-multi-ellipsis--l2`：多显示两行的文字，多余的内容会被省略  
+      `label`：自定义标题下方 label 的内容  
+      `right-icon`：自定义右侧按钮，默认为arrow  

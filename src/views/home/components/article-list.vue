@@ -14,12 +14,6 @@
         :error.sync="error"
         error-text="请求失败，点击重新加载"
       >
-        <!-- <van-cell 
-          v-for="article in channels"
-          :key="article.id"
-          :title="article.title"
-          class="cell-list"
-        /> -->
         <ArticleItem 
           v-for="article in channels"
           :key="article.id"
@@ -32,7 +26,7 @@
 </template>
 
 <script>
-import { List, Cell, PullRefresh } from 'vant'
+import { List, PullRefresh } from 'vant'
 import { getArticles } from '@/modules/index'
 import ArticleItem from '@/components/article-item'
 
@@ -47,7 +41,6 @@ export default {
   },
   components: {
     [List.name]: List,
-    [Cell.name]: Cell,
     [PullRefresh.name]: PullRefresh,
     ArticleItem
   },
