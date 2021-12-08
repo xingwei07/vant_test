@@ -12,9 +12,9 @@
             <van-image width="100" height="100" :src="image"></van-image>
           </div>
         </div>
-        <span>{{ article.aut_name }}</span>
-        <span>{{ article.comm_count }}</span>
-        <span>{{ article.pubdate }}</span>
+        <span>{{ article.aut_name }}</span>&nbsp;&nbsp;
+        <span>{{ article.comm_count }}</span>&nbsp;&nbsp;
+        <span>{{ pubdate }}</span>
       </template>
       <template #right-icon v-if="article.type === 1">
         <van-image
@@ -29,6 +29,7 @@
 
 <script>
 import { Cell, Image } from 'vant'
+import dayjs from '@/utils/day.js'
 
 export default {
   name: 'ArticleItem',
@@ -41,6 +42,11 @@ export default {
   components: {
     [Cell.name]: Cell,
     [Image.name]: Image
+  },
+  computed: {
+    pubdate() {
+      return dayjs().to(dayjs(this.article.pubdate))
+    }
   }
 }
 </script>

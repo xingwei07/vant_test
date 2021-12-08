@@ -757,3 +757,35 @@
         }
       }
       ```
+
+## 29. 日期时间的处理
+
+  1. 安装`dayjs`
+      ```npm install dayjs```
+
+  2. 新建文件`utils/day.js`
+      ```js
+      import dayjs from 'dayjs' // 导入dayjs库
+      import 'dayjs/locale/zh-cn' // 导入中文语言包
+      import relativeTime from 'dayjs/plugin/relativeTime' //导入相对时间插件
+
+      dayjs.extend(relativeTime) // 使用相对时间插件
+      dayjs.locale('zh-cn') // 使用中文语言包
+
+      export default dayjs // 默认暴露
+      ```
+
+  3. 导入文件
+      ```import dayjs from '@/utils/day.js'```
+  
+  4. 添加计算属性使用dayjs
+      ```js
+      computed: {
+        pubdate() {
+          return dayjs().to(dayjs(this.article.pubdate))
+        }
+      }
+      ```
+      `dayjs()`：获取当前时间  
+      `to`：进行比较获取相对时间  
+      `dayjs(this.article.pubdate)`：解析给定字符串
