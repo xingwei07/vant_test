@@ -789,3 +789,20 @@
       `dayjs()`：获取当前时间  
       `to`：进行比较获取相对时间  
       `dayjs(this.article.pubdate)`：解析给定字符串
+
+## 30. 弹出层组件应用
+
+  1. `Popup`组件
+      ```html
+      <van-popup
+        v-model="isChannelEditShow"
+        closeable
+        close-icon-position="top-left"
+        position="bottom"
+        :style="{ height: '100%' }"
+      />
+      ```
+      `v-model`：是否显示弹出层
+      `closeable`：是否显示关闭图标
+      `close-icon-positio`：关闭图标位置，可选值为top-left bottom-left bottom-right 默认top-right
+      `position`：弹出位置，可选值为 top bottom right lef，默认center

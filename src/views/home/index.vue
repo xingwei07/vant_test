@@ -17,14 +17,21 @@
       </van-tab>
       <template #nav-right>
         <i class="placeholder"></i>
-        <van-icon name="wap-nav" class="hamburger-btn"></van-icon>
+        <van-icon name="wap-nav" class="hamburger-btn" @click="isChannelEditShow = true"></van-icon>
       </template>
     </van-tabs>
+    <van-popup
+      v-model="isChannelEditShow"
+      closeable
+      close-icon-position="top-left"
+      position="bottom"
+      :style="{ height: '100%' }"
+    />
   </div>
 </template>
 
 <script>
-import { Tabs, Tab, Icon } from 'vant'
+import { Tabs, Tab, Icon, Popup } from 'vant'
 import Search from '@/components/nav-bar/Search'
 import { getUserChannels } from '@/modules/index'
 import ArticleList from './components/article-list'
@@ -35,13 +42,15 @@ export default {
     [Tabs.name]: Tabs,
     [Tab.name]: Tab,
     [Icon.name]: Icon,
+    [Popup.name]: Popup,
     Search,
     ArticleList
   },
   data() {
     return {
       active: 0,
-      channels: []
+      channels: [],
+      isChannelEditShow: false
     }
   },
   mounted() {
