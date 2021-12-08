@@ -3,7 +3,7 @@ import store from '@/store/index'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_URL,
-  timeout: 20000
+  timeout: 50000
 })
 
 //请求拦截器

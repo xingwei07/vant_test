@@ -20,13 +20,14 @@
           class="cell-list"
           :article="article"
         />
+        <van-empty v-if="channels.length === 0" name="notes-o" description="暂无记录" />
       </van-list>
     </van-pull-refresh>
   </div>
 </template>
 
 <script>
-import { List, PullRefresh } from 'vant'
+import { List, PullRefresh, Empty } from 'vant'
 import { getArticles } from '@/modules/index'
 import ArticleItem from '@/components/article-item'
 
@@ -42,6 +43,7 @@ export default {
   components: {
     [List.name]: List,
     [PullRefresh.name]: PullRefresh,
+    [Empty.name]: Empty,
     ArticleItem
   },
   data() {
@@ -56,11 +58,16 @@ export default {
       refreshText: ""
     }
   },
+  mounted() {
+    this.isLoading = true //默认展示下拉动作，实际加载数据由onload执行
+  },
   methods: {
     onLoad() {
+      this.error = false
       this.getListAll(this.channel.id)
     },
     onRefresh() {
+      this.error = false //清除加载失败提示
       this.channels = []
       this.pageNum = 1
       this.getListAll(this.channel.id)
@@ -79,20 +86,22 @@ export default {
           // 2. 获取到服务端返回的数据，将其填充到channels
           this.channels.push(...data.data)
           // 3. 本次数据加载完成后，要把加载状态设置为结束，loading设置为false以后，才能够触发下一次的加载更多的操作
-          this.loading = false
           this.pageNum++
-          this.isLoading = false
+          this.loading = false // 重置加载状态，才能够触发下一次加载
+          this.isLoading = false // 重置下拉刷新状态
+          this.finished = false // 第一次通过上划将列表加载完毕后finished为true，此时通过下拉刷新无法加载第二页
           this.refreshText = '刷新成功'
         } else {
           // 4. 当数据全部加载完成后，把finished设置为true
-          this.finished = true
-          this.isLoading = false
+          this.loading = false // 重置上划加载状态，否则会一直显示加载中
+          this.finished = true // 数据全部加载后，把finished设置为true
+          this.isLoading = false // 重置下拉刷新状态，否则会一直显示加载中
         }
       } catch (error) {
-        this.isLoading = false
         this.refreshText = "请求失败"
-        this.error = true
-        this.loading = false
+        this.isLoading = false // 重置上划加载状态，否则会一直显示加载中
+        this.error = true //显示失败提示
+        this.loading = false // 重置上划加载状态，否则会一直显示加载中
       }
     }
   }
@@ -100,9 +109,6 @@ export default {
 </script>
 
 <style scoped>
-/* .cell-list {
-  min-height: 100px;
-} */
 .article-list {
   margin-top: 80px;
   height: 530px;
