@@ -1,13 +1,14 @@
 <template>
   <van-nav-bar class="page-nav-bar" fixed>
     <template #right>
-      <van-button 
+      <van-button
         type="info"
         size="small"
         round
         icon="search"
         class="search-button"
-      >搜索</van-button>
+        >搜索</van-button
+      >
     </template>
   </van-nav-bar>
 </template>

@@ -1,14 +1,14 @@
 <template>
   <div class="home-container">
     <Search />
-    <van-tabs 
+    <van-tabs
       class="channels-tabs"
       v-model="active"
       title-active-color="red"
       line-width="20px"
       line-height="6px"
     >
-      <van-tab 
+      <van-tab
         v-for="channel in channels"
         :key="channel.id"
         :title="channel.name"
@@ -31,7 +31,7 @@
       position="bottom"
       :style="{ height: '100%' }"
     >
-      <ChannelEdit />
+      <ChannelEdit :myChannels="channels" :active="active" />
     </van-popup>
   </div>
 </template>
@@ -54,20 +54,23 @@ export default {
     ArticleList,
     ChannelEdit
   },
-  data() {
+  data () {
     return {
       active: 0,
       channels: [],
       isChannelEditShow: false
     }
   },
-  mounted() {
+  mounted () {
     this.getUserChannels()
   },
   methods: {
-    async getUserChannels() {
-      const { data } = await getUserChannels()
-      this.channels.push(...data.data)
+    async getUserChannels () {
+      const params = {
+        userName: this.$store.state.userStore.user.data.userName
+      }
+      const { data } = await getUserChannels(params)
+      this.channels.push(...data.data[0].userChannels)
     }
   }
 }
@@ -111,6 +114,6 @@ export default {
   z-index: 1;
 }
 .home-container {
-  padding-bottom:50px;
+  padding-bottom: 50px;
 }
 </style>

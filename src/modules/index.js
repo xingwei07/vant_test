@@ -2,25 +2,25 @@ import { post } from '@/utils/request'
 // import store from '@/store/index'
 
 // 用户登录
-export async function login(data) {
+export async function login (data) {
   const res = await post('/login', data)
   return res
 }
 
 // 获取用户完整信息
-export async function getUserInfo(id) {
-  const res = await post('/userInfo', {userId: id})
+export async function getUserInfo (id) {
+  const res = await post('/userInfo', { userId: id })
   return res
 }
 
 // 获取用户频道列表数据
-export async function getUserChannels() {
-  const res = await post('/channels', {})
+export async function getUserChannels (params) {
+  const res = await post('/channels', params)
   return res
 }
 
 // 获取文章列表
-export async function getArticles(data) {
+export async function getArticles (data) {
   const res = await post('/articles', data)
   return res
 }

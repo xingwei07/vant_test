@@ -861,3 +861,53 @@
         z-index: 2;
       }
       ```
+  
+  4. 展示我的频道数据
+      ```
+      <ChannelEdit :myChannels="channels" />
+
+      props: {
+        myChannels: {
+          type: Array,
+          required: true,
+        },
+      },
+
+      <van-grid-item
+        v-for="value in 8"
+        :key="value"
+        icon="plus"
+        text="文字"
+        class="grid-item"
+      />
+      ```
+
+  5. 处理激活频道高亮
+      ```
+      <span class="text" :class="{ active: index === active }">{{
+          channel.name
+      }}</span>
+
+      .active {
+        color: red;
+      }
+      ```
+
+  6. 展示推荐频道
+      ```js
+      channels () {
+        const channels = []
+        // 遍历所有频道
+        this.allChannels.forEach(channel => {
+          // 查询所有频道中的子项在我的频道中是否出现
+          const result = this.myChannels.find(myChannel => {
+            // 返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined。
+            return channel.id === myChannel.id
+          })
+          if (!result) {
+            channels.push(channel)
+          }
+        })
+        return channels
+      }
+      ```
