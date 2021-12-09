@@ -17,7 +17,11 @@
       </van-tab>
       <template #nav-right>
         <i class="placeholder"></i>
-        <van-icon name="wap-nav" class="hamburger-btn" @click="isChannelEditShow = true"></van-icon>
+        <van-icon
+          name="wap-nav"
+          class="hamburger-btn"
+          @click="isChannelEditShow = true"
+        ></van-icon>
       </template>
     </van-tabs>
     <van-popup
@@ -26,7 +30,9 @@
       close-icon-position="top-left"
       position="bottom"
       :style="{ height: '100%' }"
-    />
+    >
+      <ChannelEdit />
+    </van-popup>
   </div>
 </template>
 
@@ -35,6 +41,7 @@ import { Tabs, Tab, Icon, Popup } from 'vant'
 import Search from '@/components/nav-bar/Search'
 import { getUserChannels } from '@/modules/index'
 import ArticleList from './components/article-list'
+import ChannelEdit from './components/channel-edit'
 
 export default {
   name: 'Home',
@@ -44,7 +51,8 @@ export default {
     [Icon.name]: Icon,
     [Popup.name]: Popup,
     Search,
-    ArticleList
+    ArticleList,
+    ChannelEdit
   },
   data() {
     return {

@@ -768,10 +768,10 @@
       import dayjs from 'dayjs' // 导入dayjs库
       import 'dayjs/locale/zh-cn' // 导入中文语言包
       import relativeTime from 'dayjs/plugin/relativeTime' //导入相对时间插件
-
+      
       dayjs.extend(relativeTime) // 使用相对时间插件
       dayjs.locale('zh-cn') // 使用中文语言包
-
+      
       export default dayjs // 默认暴露
       ```
 
@@ -788,7 +788,7 @@
       ```
       `dayjs()`：获取当前时间  
       `to`：进行比较获取相对时间  
-      `dayjs(this.article.pubdate)`：解析给定字符串
+      `dayjs(this.article.pubdate)`：解析给定字符串  
 
 ## 30. 弹出层组件应用
 
@@ -802,7 +802,62 @@
         :style="{ height: '100%' }"
       />
       ```
-      `v-model`：是否显示弹出层
-      `closeable`：是否显示关闭图标
-      `close-icon-positio`：关闭图标位置，可选值为top-left bottom-left bottom-right 默认top-right
-      `position`：弹出位置，可选值为 top bottom right lef，默认center
+      `v-model`：是否显示弹出层  
+      `closeable`：是否显示关闭图标  
+      `close-icon-positio`：关闭图标位置，可选值为top-left bottom-left bottom-right 默认top-right  
+      `position`：弹出位置，可选值为 top bottom right lef，默认center  
+      `height`：弹出层高度  
+
+## 31. 频道编辑组件
+
+  1. 创建组件`channel-exit.vue`
+  
+  2. 使用`Cell`组件插槽实现布局
+      ```html
+      <div class="channel-edit">
+        <van-cell>
+          <template #title>
+            我的频道
+          </template>
+          <van-button type="danger" size="mini" plain round>编辑</van-button>
+        </van-cell>
+        <van-grid :gutter="10">
+          <van-grid-item v-for="value in 8" :key="value" icon="photo-o" text="文字" />
+        </van-grid>
+        <van-cell title="频道推荐" />
+        <van-grid :gutter="10">
+          <van-grid-item v-for="value in 8" :key="value" icon="photo-o" text="文字" />
+        </van-grid>
+      </div>
+      ```
+      `cell`：单元格  
+        	`#title`：自定义左侧 title 的内容  
+      `button`：按钮  
+        	`type`：类型，可选值为 primary info warning danger  
+        	`size`：尺寸，可选值为 large small mini  
+        	`plain`：是否为朴素按钮  
+        	`round`：是否为圆形按钮  
+      `grid`：宫格  
+        	`gutter`：格子之间的间距，默认单位为px  
+
+  3. 频道编辑样式调整
+      ```html
+      <van-grid-item
+        v-for="value in 8"
+        :key="value"
+        icon="clear"
+        text="文字"
+        class="grid-item"
+      >
+      </van-grid-item>
+      ```
+      ```css
+      .channel-edit .my-grid .van-icon-clear {
+        position: absolute; /* 绝对定位 */
+        right: -5px;
+        top: -5px;
+        font-size: 17px;
+        color: #cacaca;
+        z-index: 2;
+      }
+      ```
