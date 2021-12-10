@@ -7,6 +7,7 @@
       title-active-color="red"
       line-width="20px"
       line-height="6px"
+      swipe-threshold="3"
     >
       <van-tab
         v-for="channel in channels"
@@ -31,7 +32,11 @@
       position="bottom"
       :style="{ height: '100%' }"
     >
-      <ChannelEdit :myChannels="channels" :active="active" />
+      <ChannelEdit
+        :myChannels="channels"
+        :active="active"
+        @updata-active="onUpdateActive"
+      />
     </van-popup>
   </div>
 </template>
@@ -71,6 +76,11 @@ export default {
       }
       const { data } = await getUserChannels(params)
       this.channels.push(...data.data[0].userChannels)
+    },
+    // 切换频道
+    onUpdateActive (active, status = false) {
+      this.active = active
+      this.isChannelEditShow = status
     }
   }
 }

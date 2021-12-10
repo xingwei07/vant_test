@@ -911,3 +911,11 @@
         return channels
       }
       ```
+  7. 切换频道
+      ```js
+      this.$emit('updata-active', channel.id, false)
+      ```
+  删除频道
+      ```js
+      this.myChannels.splice(index, 1)
+      ```  

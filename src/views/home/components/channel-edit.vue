@@ -5,8 +5,14 @@
         <span class="title-text">我的频道</span>
       </template>
       <template #default>
-        <van-button type="danger" size="mini" plain round class="edit-btn"
-          >编辑</van-button
+        <van-button
+          type="danger"
+          size="mini"
+          plain
+          round
+          class="edit-btn"
+          @click="isEdit = !isEdit"
+          >{{ isEdit ? '完成' : '编辑' }}</van-button
         >
       </template>
     </van-cell>
@@ -14,12 +20,18 @@
       <van-grid-item
         v-for="(channel, index) in myChannels"
         :key="channel.id"
-        icon="clear"
         class="grid-item"
+        @click="onMyChannelClick(channel, index)"
       >
-        <span class="text" :class="{ active: index === active }">{{
-          channel.name
-        }}</span>
+        <template>
+          <van-icon
+            name="clear"
+            v-show="isEdit && !fixChannel.includes(channel.id)"
+          ></van-icon>
+          <span class="text" :class="{ active: index === active }">{{
+            channel.name
+          }}</span>
+        </template>
       </van-grid-item>
     </van-grid>
     <van-cell>
@@ -34,6 +46,7 @@
         icon="plus"
         :text="channel.name"
         class="grid-item"
+        @click="addChannel(channel)"
       />
     </van-grid>
   </div>
@@ -63,7 +76,9 @@ export default {
   },
   data () {
     return {
-      allChannels: [] //所有频道
+      allChannels: [], //所有频道
+      isEdit: false, // 编辑状态
+      fixChannel: [0] // 不可编辑的频道id
     }
   },
   mounted () {
@@ -74,9 +89,7 @@ export default {
     channels () {
       const channels = []
       this.allChannels.forEach(channel => {
-        let i = 0
         const result = this.myChannels.find(myChannel => {
-          console.log(++i)
           return channel.id === myChannel.id
         })
         if (!result) {
@@ -91,6 +104,27 @@ export default {
     async getAllChannels () {
       const { data } = await getUserChannels()
       this.allChannels.push(...data.data[0].userChannels)
+    },
+    // 添加推荐频道
+    addChannel (channel) {
+      this.myChannels.push(channel)
+    },
+    onMyChannelClick (channel, index) {
+      if (this.isEdit) {
+        // 编辑状态，移除频道
+        // 排除不可编辑频道
+        if (this.fixChannel.includes(channel.id)) {
+          return
+        }
+        // 移除频道
+        this.myChannels.splice(index, 1)
+        if (channel.id <= this.active) {
+          this.$emit('updata-active', index - 1, true)
+        }
+      } else {
+        // 非编辑状态，切换频道
+        this.$emit('updata-active', channel.id, false)
+      }
     }
   }
 }
