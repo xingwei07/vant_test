@@ -54,7 +54,8 @@
 
 <script>
 import { Cell, Button, Grid, GridItem, Icon } from 'vant'
-import { getUserChannels } from '@/modules/index'
+import { getUserChannels, addUserChannel, delUserChannel } from '@/modules/index'
+import { setItem } from '@/utils/storage'
 export default {
   name: 'ChannelEdit',
   props: {
@@ -90,26 +91,41 @@ export default {
       const channels = []
       this.allChannels.forEach(channel => {
         const result = this.myChannels.find(myChannel => {
-          return channel.id === myChannel.id
+          return channel.id == myChannel.id
         })
         if (!result) {
           channels.push(channel)
         }
       })
       return channels
+    },
+    user () {
+      return this.$store.state.userStore.user
     }
   },
   methods: {
     // 获取所有频道列表
     async getAllChannels () {
       const { data } = await getUserChannels()
-      this.allChannels.push(...data.data[0].userChannels)
+      this.allChannels.push(...data.data)
     },
     // 添加推荐频道
-    addChannel (channel) {
+    async addChannel (channel) {
       this.myChannels.push(channel)
+      if (this.user) {
+        // 已经登录，发送请求
+        const data = {
+          userName: this.user.data.userName,
+          channel
+        }
+        // 添加用户频道
+        await addUserChannel(data)
+      } else {
+        // 未登录，存入缓存
+        setItem('TOUTIAO_CHANNELS', this.myChannels)
+      }
     },
-    onMyChannelClick (channel, index) {
+    async onMyChannelClick (channel, index) {
       if (this.isEdit) {
         // 编辑状态，移除频道
         // 排除不可编辑频道
@@ -120,6 +136,18 @@ export default {
         this.myChannels.splice(index, 1)
         if (channel.id <= this.active) {
           this.$emit('updata-active', index - 1, true)
+        }
+        // 是否登录
+        if (this.user) {
+          // 已经登录，发送请求 
+          const param = {
+            userName: this.user.data.userName,
+            channelId: channel.id
+          }
+          await delUserChannel(param)
+        } else {
+          // 未登录，修改缓存
+          setItem('TOUTIAO_CHANNELS', this.myChannels)
         }
       } else {
         // 非编辑状态，切换频道

@@ -24,3 +24,15 @@ export async function getArticles (data) {
   const res = await post('/articles', data)
   return res
 }
+
+// 添加用户频道
+export async function addUserChannel (data) {
+  const res = await post('/addUserChannel', data)
+  return res
+}
+
+// 删除用户频道
+export async function delUserChannel (data) {
+  const res = await post('/delUserChannel', data)
+  return res
+}

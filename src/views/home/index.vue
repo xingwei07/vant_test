@@ -47,6 +47,7 @@ import Search from '@/components/nav-bar/Search'
 import { getUserChannels } from '@/modules/index'
 import ArticleList from './components/article-list'
 import ChannelEdit from './components/channel-edit'
+import { getItem } from '@/utils/storage'
 
 export default {
   name: 'Home',
@@ -70,16 +71,34 @@ export default {
     this.getUserChannels()
   },
   methods: {
+    // 获取用户频道列表
     async getUserChannels () {
-      const params = {
-        userName: this.$store.state.userStore.user.data.userName
+      const user = this.$store.state.userStore.user
+      if (user) {
+        // 已登录，查询数据
+        const params = {
+          userName: user.data.userName
+        }
+        const { data } = await getUserChannels(params)
+        this.channels.push(...data.data)
+      } else {
+        // 未登录，获取缓存
+        const data = getItem('TOUTIAO_CHANNELS')
+        if (data) {
+          this.channels.push(...data)
+        } else {
+          // 获取不到缓存
+          const params = {
+            userName: ""
+          }
+          const { data } = await getUserChannels(params)
+          this.channels.push(...data.data)
+        }
       }
-      const { data } = await getUserChannels(params)
-      this.channels.push(...data.data[0].userChannels)
     },
     // 切换频道
     onUpdateActive (active, status = false) {
-      this.active = active
+      this.active = Number(active)
       this.isChannelEditShow = status
     }
   }
