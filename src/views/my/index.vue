@@ -50,7 +50,12 @@
     <!-- 消息通知与退出登录布局 -->
     <van-cell title="消息通知" is-link />
     <van-cell title="小智同学" is-link />
-    <van-cell v-if="user" @click="onLogout" title="退出登录" class="layout-cell" />
+    <van-cell
+      v-if="user"
+      @click="onLogout"
+      title="退出登录"
+      class="layout-cell"
+    />
   </div>
 </template>
 
@@ -67,7 +72,7 @@ export default {
     [Cell.name]: Cell,
     [Dialog.name]: Dialog
   },
-  data() {
+  data () {
     return {
       userInfo: {
         userName: "",
@@ -79,29 +84,29 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     //获取用户详细信息
     this.getUserInfo()
   },
   computed: {
-    user() {
+    user () {
       return this.$store.state.userStore.user
     }
   },
   methods: {
     //退出登录
-    onLogout() {
+    onLogout () {
       Dialog.confirm({
         title: '是否确认退出'
       }).then(() => {
         this.$store.commit('userStore/setUser', null)
-      }).catch(()=> {
+      }).catch(() => {
         console.log('取消操作')
       });
     },
     //获取用户详细信息
-    async getUserInfo() {
-      if(this.user) {
+    async getUserInfo () {
+      if (this.user) {
         const userId = this.user.data.userId
         const { data } = await getUserInfo(userId)
         this.userInfo = data.data[0]
@@ -134,7 +139,7 @@ export default {
   height: 132px;
   margin-bottom: 15px;
 }
-.text {
+.my-container .text {
   font-size: 18px;
   color: #fff;
 }
