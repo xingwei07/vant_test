@@ -151,7 +151,7 @@ export default {
         }
       } else {
         // 非编辑状态，切换频道
-        this.$emit('updata-active', channel.id, false)
+        this.$emit('updata-active', index, false)
       }
     }
   }
