@@ -915,7 +915,103 @@
       ```js
       this.$emit('updata-active', channel.id, false)
       ```
-  删除频道
+      删除频道
       ```js
       this.myChannels.splice(index, 1)
       ```  
+
+## 32.搜索功能
+
+  1. 创建组件`SearchHistory`，`SearchSuggestion`，`SearchResult`
+  `SearchHistory`搜索历史：
+      ```html
+      <van-cell title="搜索历史">
+        <span>全部删除</span>
+        <span>取消</span>
+        <van-icon name="delete"></van-icon>
+      </van-cell>
+      <van-cell title="hello">
+        <van-icon name="close"></van-icon>
+      </van-cell>
+      默认插槽：右侧内容
+      ```
+`SearchSuggestion`联想建议：
+      ```html
+      <van-cell title="联想建议" icon="search"></van-cell>
+      icon：左侧图标
+      ```
+`SearchResult`搜索结果：
+      ```html
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+      >
+        <van-cell v-for="item in list" :key="item" :title="item" />
+      </van-list>
+      ```
+  2. 显示判断逻辑
+      ```html
+      <!-- 搜索结果 -->
+      <SearchResult v-if="isResultShow" />
+      <!-- 联想建议 -->
+      <SearchSuggestion v-else-if="searchText" />
+      <!-- 搜索历史 -->
+      <SearchHistory v-else />
+       ```
+
+## 33.联想建议
+
+  1. 添加监视
+      ```js
+      watch: {
+        searchText: {
+          immediate: true, //加载后立即执行监视
+          async handler (newValue) {
+            this.suggestion = []
+            const params = {
+              title: newValue
+            }
+            // 查询联想建议
+            const { data } = await getSuggestion(params)
+            this.suggestion.push(...data.data)
+          }
+        }
+      }
+      ```
+  2. 防抖处理
+      ```js
+      watch: {
+        searchText: {
+          immediate: true, //加载后立即执行监视
+          handler (newValue) {
+            this.loadSuccestion(newValue)
+          }
+        }
+      },
+      
+      loadSuccestion: debounce(async function (newValue) {
+        this.suggestion = []
+        const params = {
+          title: newValue
+        }
+        // 查询联想建议
+        const { data } = await getSuggestion(params)
+        this.suggestion.push(...data.data)
+      }, 3000)
+      ```
+      `debounce`：间隔一段时间后再执行后面的函数
+
+  3. 关键字高亮
+      ```html
+      <span v-html="highLight(text.title)"></span>
+      ```
+      ```js
+       highLight (title) {
+        const hightStr = `<span style="color:red;">${this.searchText}</span>`
+        const reg = new RegExp(this.searchText, "gi") // 匹配this.searchText
+        return title.replace(reg, hightStr)
+      }
+      ```
+

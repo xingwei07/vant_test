@@ -7,6 +7,7 @@
         round
         icon="search"
         class="search-button"
+        to="/search"
         >搜索</van-button
       >
     </template>
