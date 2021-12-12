@@ -6,13 +6,15 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <van-cell v-for="item in list" :key="item" :title="item" />
+      <van-cell v-for="item in list" :key="item.id" :title="item.title" />
     </van-list>
   </div>
 </template>
 
 <script>
 import { List, Cell } from 'vant'
+import { getSearchResult } from '@/modules/index'
+
 export default {
   name: 'Search-Result',
   props: {
@@ -30,26 +32,32 @@ export default {
       list: [],
       loading: false,
       finished: false,
+      pageSize: 10,
+      pageNum: 1
     };
   },
   methods: {
-    onLoad () {
-      console.log(this.searchText)
-      // 异步更新数据
-      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-      setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1);
+    async onLoad () {
+      try {
+        // 异步获取数据
+        const { data } = await getSearchResult({
+          pageSize: this.pageSize,
+          pageNum: this.pageNum,
+          searchText: this.searchText
+        })
+        if (data.status) {
+          this.list.push(...data.data)
+          this.pageNum++
+          this.loading = false
+          this.finished = false
+        } else {
+          this.loading = false
+          this.finished = true
         }
-
-        // 加载状态结束
-        this.loading = false;
-
-        // 数据全部加载完成
-        if (this.list.length >= 40) {
-          this.finished = true;
-        }
-      }, 1000);
+      } catch (error) {
+        this.loading = false
+        this.finished = true
+      }
     },
   },
 }

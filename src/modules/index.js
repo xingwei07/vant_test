@@ -37,8 +37,14 @@ export async function delUserChannel (data) {
   return res
 }
 
-// 获取搜索建议
+// 获取联想建议
 export async function getSuggestion (data) {
   const res = await post('/getSuggestion', data)
+  return res
+}
+
+// 获取搜索结果
+export async function getSearchResult (data) {
+  const res = await post('/getSearchResult', data)
   return res
 }
