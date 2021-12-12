@@ -19,7 +19,11 @@
       @search="onSearch"
     />
     <!-- 搜索历史 -->
-    <SearchHistory v-else />
+    <SearchHistory
+      v-else
+      :searchHistories="searchHistories"
+      @onSearch="onSearch"
+    />
   </div>
 </template>
 
@@ -28,6 +32,7 @@ import { Search } from 'vant'
 import SearchHistory from './components/search-history'
 import SearchResult from './components/search-result'
 import SearchSuggestion from './components/search-suggestion'
+import { setItem, getItem } from '@/utils/storage'
 
 export default {
   name: 'Search',
@@ -40,11 +45,23 @@ export default {
   data () {
     return {
       searchText: '',
-      isResultShow: false
+      isResultShow: false,
+      searchHistories: getItem('TOUTIAO_HISTORY') || [] // 搜索历史记录
+    }
+  },
+  watch: {
+    searchHistories (newValue) {
+      setItem('TOUTIAO_HISTORY', newValue)
     }
   },
   methods: {
     onSearch (text) {
+      const index = this.searchHistories.indexOf(text)
+      if (index !== -1) {
+        this.searchHistories.splice(index, 1)
+      }
+      this.searchHistories.unshift(text)
+
       this.searchText = text
       this.isResultShow = true
     },
@@ -68,7 +85,6 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
   z-index: 1;
 }
 </style>
