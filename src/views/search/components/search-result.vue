@@ -15,6 +15,12 @@
 import { List, Cell } from 'vant'
 export default {
   name: 'Search-Result',
+  props: {
+    searchText: {
+      type: String,
+      required: true
+    }
+  },
   components: {
     [List.name]: List,
     [Cell.name]: Cell
@@ -28,6 +34,7 @@ export default {
   },
   methods: {
     onLoad () {
+      console.log(this.searchText)
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
       setTimeout(() => {

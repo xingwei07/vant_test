@@ -1,6 +1,11 @@
 <template>
   <div>
-    <van-cell v-for="(text, index) in suggestion" :key="index" icon="search">
+    <van-cell
+      v-for="(text, index) in suggestion"
+      :key="index"
+      icon="search"
+      @click="onSearch(text.title)"
+    >
       <template #title>
         <span v-html="highLight(text.title)"></span>
       </template>
@@ -51,6 +56,9 @@ export default {
       const hightStr = `<span style="color:red;">${this.searchText}</span>`
       const reg = new RegExp(this.searchText, "gi") // 匹配this.searchText
       return title.replace(reg, hightStr)
+    },
+    onSearch (searchText) {
+      this.$emit('search', searchText)
     }
   }
 }
