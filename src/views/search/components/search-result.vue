@@ -4,6 +4,8 @@
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
+      :error.sync="error"
+      error-text="请求失败，点击重新加载"
       @load="onLoad"
     >
       <van-cell v-for="item in list" :key="item.id" :title="item.title" />
@@ -33,7 +35,8 @@ export default {
       loading: false,
       finished: false,
       pageSize: 10,
-      pageNum: 1
+      pageNum: 1,
+      error: false
     };
   },
   methods: {
@@ -55,8 +58,8 @@ export default {
           this.finished = true
         }
       } catch (error) {
+        this.error = true
         this.loading = false
-        this.finished = true
       }
     },
   },
