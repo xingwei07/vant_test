@@ -15,6 +15,12 @@ const routes = [
     component: () => import('@/views/search/index')
   },
   {
+    path: '/article/:articleId',
+    name: 'Article',
+    component: () => import('@/views/article/index'),
+    props: true
+  },
+  {
     path: '/',
     component: () => import('@/views/layout/index'),
     children: [

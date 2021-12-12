@@ -1,9 +1,19 @@
 <template>
   <div>
-    <van-cell class="article-item">
+    <van-cell
+      class="article-item"
+      :to="{
+        name: 'Article',
+        params: {
+          articleId: article.id
+        }
+      }"
+    >
       <template #title>
         <span class="title van-multi-ellipsis--l2">
-          {{ article.title }}吉特任务特区法第三部分年度特人违反收费低功耗法吉特如果是
+          {{
+            article.title
+          }}吉特任务特区法第三部分年度特人违反收费低功耗法吉特如果是
         </span>
       </template>
       <template #label>
@@ -12,8 +22,9 @@
             <van-image width="100" height="100" :src="image"></van-image>
           </div>
         </div>
-        <span>{{ article.aut_name }}</span>&nbsp;&nbsp;
-        <span>{{ article.comm_count }}</span>&nbsp;&nbsp;
+        <span>{{ article.aut_name }}</span
+        >&nbsp;&nbsp; <span>{{ article.comm_count }}</span
+        >&nbsp;&nbsp;
         <span>{{ pubdate }}</span>
       </template>
       <template #right-icon v-if="article.type === 1">
@@ -44,7 +55,7 @@ export default {
     [Image.name]: Image
   },
   computed: {
-    pubdate() {
+    pubdate () {
       return dayjs().to(dayjs(this.article.pubdate))
     }
   }
