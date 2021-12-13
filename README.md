@@ -1015,3 +1015,30 @@
       }
       ```
 
+## 34.实现图片预览效果
+
+  1. 图片预览
+      ```html
+      <div
+        class="article-content"
+        v-html="article.content"
+        ref="articleContent"
+      ></div>
+      ```
+      ```js
+      setTimeout(() => {
+        // 获取所有img标签
+        const imgs = this.$refs.articleContent.querySelectorAll('img')
+        const images = []
+        imgs.forEach((img, index) => {
+          images.push(img.src)
+          // 添加点击事件
+          img.onclick = () => {
+            ImagePreview({
+              images, // 图片列表
+              startPosition: index // 初始位置
+            })
+          }
+        })
+      }, 0)
+      ```

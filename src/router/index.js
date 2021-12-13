@@ -18,7 +18,10 @@ const routes = [
     path: '/article/:articleId',
     name: 'Article',
     component: () => import('@/views/article/index'),
-    props: true
+    props: true,
+    meta: {
+      title: '博学谷头条'
+    }
   },
   {
     path: '/',

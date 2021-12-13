@@ -4,14 +4,15 @@
       class="page-nav-bar"
       left-arrow
       title="博学谷头条"
+      @click-left="$router.back()"
     ></van-nav-bar>
 
     <div class="main-wrap">
-      <div class="loading-wrap">
+      <div class="loading-wrap" v-if="loading">
         <van-loading color="#3296fa" vertical>加载中</van-loading>
       </div>
 
-      <div class="article-detail">
+      <div class="article-detail" v-else-if="article.title">
         <h1 class="article-title">{{ article.title }}</h1>
 
         <van-cell class="user-info" center :border="false">
@@ -34,26 +35,30 @@
           >
         </van-cell>
 
-        <div class="article-content" v-html="article.content"></div>
+        <div
+          class="article-content"
+          v-html="article.content"
+          ref="articleContent"
+        ></div>
         <van-divider>正文结束</van-divider>
       </div>
 
-      <div class="error-wrap">
+      <div class="error-wrap" v-else-if="errStatus">
         <van-icon name="failure"></van-icon>
         <p class="text">该资源不存在或已删除！</p>
       </div>
 
-      <div class="error-wrap">
+      <div class="error-wrap" v-else>
         <van-icon name="failure"></van-icon>
         <p class="text">内容加载失败！</p>
-        <van-button class="retry-btn">点击重试</van-button>
+        <van-button class="retry-btn" @click="onLoad">点击重试</van-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { NavBar, Loading, Cell, Image, Button, Divider, Icon } from 'vant'
+import { NavBar, Loading, Cell, Image, Button, Divider, Icon, ImagePreview } from 'vant'
 import dayjs from '@/utils/day'
 import { getArticleById } from '@/modules/index'
 
@@ -61,7 +66,7 @@ export default {
   name: 'Article',
   props: {
     articleId: {
-      type: String,
+      // type: String,
       required: true
     }
   },
@@ -83,7 +88,9 @@ export default {
         aut_name: "",
         pubdate: "",
         content: ""
-      }
+      },
+      loading: true,
+      errStatus: 0
     }
   },
   computed: {
@@ -91,18 +98,57 @@ export default {
       return dayjs().to(dayjs(this.article.pubdate))
     }
   },
-  async mounted () {
-    try {
-      const { data } = await getArticleById({ articleId: this.articleId })
-      this.article = data.data
-    } catch (error) {
-      console.log(error)
+  mounted () {
+    this.getListAll()
+  },
+  methods: {
+    // 加载数据
+    async getListAll () {
+      try {
+        const { data } = await getArticleById({ articleId: this.articleId })
+        console.log(data)
+        if (data.status) {
+          this.article = data.data
+          // 加入队列，等待页面渲染完成后再执行
+          setTimeout(() => {
+            // 获取所有img标签
+            const imgs = this.$refs.articleContent.querySelectorAll('img')
+            const images = []
+            imgs.forEach((img, index) => {
+              images.push(img.src)
+              // 添加点击事件
+              img.onclick = () => {
+                ImagePreview({
+                  images,
+                  startPosition: index, // 初始位置
+                })
+              }
+            })
+          }, 0)
+        } else {
+          this.errStatus = true
+        }
+      } catch (error) {
+        console.log(error)
+      }
+      this.loading = false
+    },
+    // 重新加载
+    onLoad () {
+      this.loading = true
+      this.getListAll()
     }
   }
 }
 </script>
 
 <style>
+.page-nav-bar {
+  background-color: #3296fa;
+}
+.page-nav-bar .van-icon {
+  color: #fff;
+}
 .article-container .main-wrap {
   position: fixed;
   left: 0;
