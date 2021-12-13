@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="search-result">
     <van-list
       v-model="loading"
       :finished="finished"
@@ -7,6 +7,7 @@
       :error.sync="error"
       error-text="请求失败，点击重新加载"
       @load="onLoad"
+      class="search-list"
     >
       <van-cell v-for="item in list" :key="item.id" :title="item.title" />
     </van-list>
@@ -67,4 +68,7 @@ export default {
 </script>
 
 <style>
+.search-result .search-list .van-cell {
+  min-height: 100px;
+}
 </style>
