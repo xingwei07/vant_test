@@ -48,3 +48,9 @@ export async function getSearchResult (data) {
   const res = await post('/getSearchResult', data)
   return res
 }
+
+// 获取文章详情
+export async function getArticleById (data) {
+  const res = await post('/getArticleById', data)
+  return res
+}

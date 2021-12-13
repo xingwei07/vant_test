@@ -12,7 +12,7 @@
       </div>
 
       <div class="article-detail">
-        <h1 class="article-title">这是文章标题</h1>
+        <h1 class="article-title">{{ article.title }}</h1>
 
         <van-cell class="user-info" center :border="false">
           <van-image
@@ -21,8 +21,8 @@
             fit="cover"
             src="https://img.yzcdn.cn/vant/cat.jpeg"
           ></van-image>
-          <template #title class="user-name">博学谷头条号</template>
-          <template #label class="publish-date">14小时前</template>
+          <template #title class="user-name">{{ article.aut_name }}</template>
+          <template #label class="publish-date">{{ pubdate }}</template>
           <van-button
             class="follow-btn"
             type="info"
@@ -34,7 +34,7 @@
           >
         </van-cell>
 
-        <div class="article-content">这是文章内容</div>
+        <div class="article-content" v-html="article.content"></div>
         <van-divider>正文结束</van-divider>
       </div>
 
@@ -54,12 +54,14 @@
 
 <script>
 import { NavBar, Loading, Cell, Image, Button, Divider, Icon } from 'vant'
+import dayjs from '@/utils/day'
+import { getArticleById } from '@/modules/index'
 
 export default {
   name: 'Article',
   props: {
     articleId: {
-      type: Number,
+      type: String,
       required: true
     }
   },
@@ -71,6 +73,31 @@ export default {
     [Button.name]: Button,
     [Divider.name]: Divider,
     [Icon.name]: Icon
+  },
+  data () {
+    return {
+      article: {
+        id: "",
+        title: "",
+        photo: "",
+        aut_name: "",
+        pubdate: "",
+        content: ""
+      }
+    }
+  },
+  computed: {
+    pubdate () {
+      return dayjs().to(dayjs(this.article.pubdate))
+    }
+  },
+  async mounted () {
+    try {
+      const { data } = await getArticleById({ articleId: this.articleId })
+      this.article = data.data
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 </script>
