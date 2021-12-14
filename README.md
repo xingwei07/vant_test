@@ -922,8 +922,8 @@
 
 ## 32.搜索功能
 
-  1. 创建组件`SearchHistory`，`SearchSuggestion`，`SearchResult`
-  `SearchHistory`搜索历史：
+  1. 创建组件`SearchHistory`，`SearchSuggestion`，`SearchResult`  
+  - `SearchHistory`搜索历史：
       ```html
       <van-cell title="搜索历史">
         <span>全部删除</span>
@@ -933,14 +933,15 @@
       <van-cell title="hello">
         <van-icon name="close"></van-icon>
       </van-cell>
-      默认插槽：右侧内容
       ```
-`SearchSuggestion`联想建议：
+      默认插槽：右侧内容
+      
+  - `SearchSuggestion`联想建议：
       ```html
       <van-cell title="联想建议" icon="search"></van-cell>
-      icon：左侧图标
       ```
-`SearchResult`搜索结果：
+      `icon`：左侧图标
+  - `SearchResult`搜索结果：
       ```html
       <van-list
         v-model="loading"
@@ -951,7 +952,7 @@
         <van-cell v-for="item in list" :key="item" :title="item" />
       </van-list>
       ```
-  2. 显示判断逻辑
+  1. 显示判断逻辑
       ```html
       <!-- 搜索结果 -->
       <SearchResult v-if="isResultShow" />
