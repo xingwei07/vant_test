@@ -4,7 +4,7 @@
       class="page-nav-bar"
       left-arrow
       title="博学谷头条"
-      @click-left="$router.back()"
+      @click-left="back"
     ></van-nav-bar>
 
     <div class="main-wrap">
@@ -106,7 +106,6 @@ export default {
     async getListAll () {
       try {
         const { data } = await getArticleById({ articleId: this.articleId })
-        console.log(data)
         if (data.status) {
           this.article = data.data
           // 加入队列，等待页面渲染完成后再执行
@@ -121,6 +120,8 @@ export default {
                 ImagePreview({
                   images,
                   startPosition: index, // 初始位置
+                  closeable: true, // 展示关闭按钮
+                  showIndicators: true // 是否显示轮播指示器
                 })
               }
             })
@@ -137,6 +138,10 @@ export default {
     onLoad () {
       this.loading = true
       this.getListAll()
+    },
+    back () {
+      this.$destroy(true)
+      this.$router.back()
     }
   }
 }

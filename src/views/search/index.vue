@@ -68,6 +68,7 @@ export default {
     onCancel () {
       console.log('cancel')
       this.isResultShow = false
+      this.$router.back()
     }
   }
 }

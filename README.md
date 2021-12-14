@@ -1036,7 +1036,9 @@
           img.onclick = () => {
             ImagePreview({
               images, // 图片列表
-              startPosition: index // 初始位置
+              startPosition: index, // 初始位置
+              loseable: true, // 展示关闭按钮
+              showIndicators: true // 是否显示轮播指示器
             })
           }
         })
