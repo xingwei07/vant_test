@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import userStore from './modules/user'
+import h5plus from './modules/h5plus'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules:{
-    userStore
+  modules: {
+    userStore,
+    h5plus
   }
 })
