@@ -1,6 +1,6 @@
 <template>
   <van-nav-bar class="page-nav-bar" fixed>
-    <template #right>
+    <template #title>
       <van-button
         type="info"
         size="small"
@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .page-nav-bar {
   background-color: #3296fa;
 }
@@ -37,6 +37,11 @@ export default {
   background-color: #5babfb;
   border: none;
 }
+
+.page-nav-bar .van-nav-bar__title {
+  max-width: 100%;
+}
+
 .van-nav-bar .van-icon {
   color: #fff;
 }
