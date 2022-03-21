@@ -11,9 +11,8 @@
     >
       <template #title>
         <span class="title van-multi-ellipsis--l2">
-          {{
-            article.title
-          }}吉特任务特区法第三部分年度特人违反收费低功耗法吉特如果是
+          {{ article.title }}
+          吉特任务特区法第三部分年度特人违反收费低功耗法吉特如果是
         </span>
       </template>
       <template #label>

@@ -952,7 +952,7 @@
         <van-cell v-for="item in list" :key="item" :title="item" />
       </van-list>
       ```
-  1. 显示判断逻辑
+  2. 显示判断逻辑
       ```html
       <!-- 搜索结果 -->
       <SearchResult v-if="isResultShow" />

@@ -8,17 +8,17 @@ const service = axios.create({
 
 //请求拦截器
 service.interceptors.request.use(
-  function(config) {
-    if(!config.params) {
+  function (config) {
+    if (!config.params) {
       config.params = {}
     }
     const user = store.state.userStore.user
-    if(user && user.data) {
+    if (user && user.data) {
       config.params.token = user.data.token
     }
     return config
   },
-  function(err) {
+  function (err) {
     return Promise.reject(err)
   }
 )
